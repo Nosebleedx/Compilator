@@ -1,40 +1,144 @@
 grammar My_grammar;
 
-prog: initialization;
+prog
+    : block '.' EOF
+    ;
 
-initialization: TYPE ID;
+block
+    : consts? vars_? procedure* stat
+    ;
 
-TYPE: INTEGER | FLOAT ;
+consts
+    : CONST ident '=' number (',' ident '=' number)* ';'
+    ;
 
-LINE: '"' (LETTER | PUNCTUATION | EMPTY | DIGIT)+ '"';
+vars_
+    : VAR ident (',' ident)* ';'
+    ;
 
-ID: LETTER (LETTER | DIGIT)*;
+procedure
+    : PROCEDURE ident ';' block ';'
+    ;
 
-NUMBER: ('-')? DIGIT+ ('.' DIGIT+)?;
+stat
+    : (assignstmt | callstmt | writestmt | qstmt | bangstmt | beginstmt | ifstmt | whilestmt)?
+    ;
 
-fragment DIGIT : [0-9];
-fragment LETTER : [a-zA-Z];
-fragment PUNCTUATION : [!.,;:];
+assignstmt
+    : ident ':=' expression
+    ;
 
-LPAREN: '(';
-RPAREN: ')';
+callstmt
+    : CALL ident
+    ;
 
-INTEGER: 'int';
-FLOAT: 'float';
+writestmt
+    : WRITE ident
+    ;
 
-ADD: '+';
-SUB: '-';
-SEP: '/';
-MUL: '*';
+qstmt
+    : '?' ident
+    ;
 
-EQ_EQ: '==';
-NOT_EQ: '!=';
-GT: '>';
-LT: '<';
-LE : '<=';
-GE: '>=';
-ASSIGNMENT : '=';
+bangstmt
+    : '!' expression
+    ;
 
-END : ';';
+beginstmt
+    : BEGIN stat (';' stat)* END
+    ;
 
-EMPTY: [ \n\t\r] -> skip;
+ifstmt
+    : IF condition THEN stat
+    ;
+
+whilestmt
+    : WHILE condition DO stat
+    ;
+
+condition
+    : ODD expression
+    | expression ('=' | '#' | '<' | '<=' | '>' | '>=') expression
+    ;
+
+expression
+    : ('+' | '-')? term (('+' | '-') term)*
+    ;
+
+term
+    : factor (('*' | '/') factor)*
+    ;
+
+factor
+    : ident
+    | number
+    | '(' expression ')'
+    ;
+
+ident
+    : STRING
+    ;
+
+number
+    : NUMBER
+    ;
+
+WRITE
+    : 'WRITE'
+    ;
+
+WHILE
+    : 'WHILE'
+    ;
+
+DO
+    : 'DO'
+    ;
+
+IF
+    : 'IF'
+    ;
+
+THEN
+    : 'THEN'
+    ;
+
+ODD
+    : 'ODD'
+    ;
+
+BEGIN
+    : 'BEGIN'
+    ;
+
+END
+    : 'END'
+    ;
+
+CALL
+    : 'CALL'
+    ;
+
+CONST
+    : 'CONST'
+    ;
+
+VAR
+    : 'VAR'
+    ;
+
+PROCEDURE
+    : 'PROCEDURE'
+    ;
+
+STRING
+    : [a-zA-Z] [a-zA-Z]*
+    ;
+
+NUMBER
+    : [0-9]+
+    ;
+
+WS
+    : [ \t\r\n] -> skip
+    ;
