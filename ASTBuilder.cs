@@ -25,21 +25,47 @@ namespace COMPILATAR_V1._0
 		public override ASTNode VisitBlock([NotNull] My_grammarParser.BlockContext context)
 		{
 			var beginNode = new BeginStmtNode();
-			if(context.stat() != null)
+
+			// Обрабатываем константы, если они есть
+			if (context.consts() != null)
+			{
+				beginNode.Children.Add(Visit(context.consts()));
+			}
+
+			// Обрабатываем переменные, если они есть
+			if (context.vars_() != null)
+			{
+				beginNode.Children.Add(Visit(context.vars_()));
+			}
+
+			// Обрабатываем процедуры, если они есть
+			foreach (var proc in context.procedure())
+			{
+				beginNode.Children.Add(Visit(proc));
+			}
+
+			// Обрабатываем операторы, если они есть
+			if (context.stat() != null)
 			{
 				beginNode.Children.Add(Visit(context.stat()));
 			}
+
 			return beginNode;
 		}
+
 
 		public override ASTNode VisitAssignstmt([NotNull] My_grammarParser.AssignstmtContext context)
 		{
 			var varName = context.ident().GetText();
-			var expression = Visit(context.expression());
-			var assignNode = new AssignStmtNode(varName, expression);
-			return assignNode;
-		}
+			var expressionNode = Visit(context.expression());
 
+			return new AssignStmtNode
+			{
+				VarName = varName,
+				Expression = expressionNode,
+				Type = "AssignStmt"
+			};
+		}
 		public override ASTNode VisitCallstmt([NotNull] My_grammarParser.CallstmtContext context)
 		{
 			var procedureName = context.ident().GetText();
@@ -88,25 +114,35 @@ namespace COMPILATAR_V1._0
 
 		public override ASTNode VisitExpression([NotNull] My_grammarParser.ExpressionContext context)
 		{
-			if (context.children.Count == 1)
-			{
-				return Visit(context.children[0]);
-			}
-			else if (context.children.Count == 3)
-			{
-				var left = Visit(context.children[0]);
-				var op = context.children[1].GetText();
-				var right = Visit(context.children[2]);
+			ASTNode node = Visit(context.term(0));
 
-				var expressionNode = new ExpressionNode
+			for (int i = 1; i < context.term().Length; i++)
+			{
+				var operatorToken = context.GetChild(2 * i - 1).GetText();
+				var rightNode = Visit(context.term(i));
+
+				node = new ExpressionNode
 				{
-					Left = left,
-					Operator = op,
-					Right = right
+					Left = node,
+					Operator = operatorToken,
+					Right = rightNode,
+					Type = "Expression"
 				};
-				return expressionNode;
 			}
-			throw new InvalidOperationException("Неизвестное выражение");
+
+			if (context.GetChild(0).GetText() == "-" && context.term().Length == 1)
+			{
+				// Handle unary minus
+				node = new ExpressionNode
+				{
+					Left = new NumberNode { Value = "0", Type = "Number" },
+					Operator = "-",
+					Right = node,
+					Type = "Expression"
+				};
+			}
+
+			return node;
 		}
 
 		public override ASTNode VisitBeginstmt([NotNull] My_grammarParser.BeginstmtContext context)
@@ -128,8 +164,80 @@ namespace COMPILATAR_V1._0
 		{
 			return new VariableNode { Value = context.GetText() };
 		}
+		public override ASTNode VisitVars_([NotNull] My_grammarParser.Vars_Context context)
+		{
+			// Создаем узел для блока переменных
+			var varBlockNode = new VarBlockNode();
 
-		
+			// Проходим по всем идентификаторам в блоке VAR
+			foreach (var ident in context.ident())
+			{
+				// Добавляем каждый идентификатор как дочерний узел к блоку переменных
+				var varNode = new VariableNode
+				{
+					Value = ident.GetText(),
+					Type = "Variable"
+				};
+				varBlockNode.Children.Add(varNode);
+			}
+
+			return varBlockNode;
+		}
+		public override ASTNode VisitTerm([NotNull] My_grammarParser.TermContext context)
+		{
+			ASTNode node = Visit(context.factor(0));
+
+			for (int i = 1; i < context.factor().Length; i++)
+			{
+				var operatorToken = context.GetChild(2 * i - 1).GetText();
+				var rightNode = Visit(context.factor(i));
+
+				node = new ExpressionNode
+				{
+					Left = node,
+					Operator = operatorToken,
+					Right = rightNode,
+					Type = "Expression"
+				};
+			}
+
+			return node;
+		}
+
+		public override ASTNode VisitFactor([NotNull] My_grammarParser.FactorContext context)
+		{
+			if (context.ident() != null)
+			{
+				return new VariableNode
+				{
+					Value = context.ident().GetText(),
+					Type = "Variable"
+				};
+			}
+			else if (context.number() != null)
+			{
+				return new NumberNode
+				{
+					Value = context.number().GetText(),
+					Type = "Number"
+				};
+			}
+			else if (context.expression() != null)
+			{
+				return Visit(context.expression());
+			}
+
+			throw new Exception("Unsupported factor type");
+		}
+		public override ASTNode VisitProcedure([NotNull] My_grammarParser.ProcedureContext context)
+		{	
+			// Создаем узел для процедуры
+			var procedureNode = new ProcedureNode(context.ident().GetText()) {Body = Visit(context.block()) };
+
+			return procedureNode;
+		}
+
+
 	}
 
 

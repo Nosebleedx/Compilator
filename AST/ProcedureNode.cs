@@ -9,6 +9,8 @@ namespace COMPILATAR_V1._0.AST
 	public class ProcedureNode : ASTNode
 	{
 		public string Name { get; set; }
+		public ASTNode Body { get; set; }
+
 		public ProcedureNode(string name)
 		{
 			Type = "Procedure";

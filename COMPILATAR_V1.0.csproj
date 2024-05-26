@@ -97,7 +97,9 @@
     <Compile Include="AST\PrintStmtNode.cs" />
     <Compile Include="AST\ProcedureNode.cs" />
     <Compile Include="AST\ProgramNode.cs" />
+    <Compile Include="AST\VarBlockNode.cs" />
     <Compile Include="AST\VariableNode.cs" />
+    <Compile Include="AST\VarsNode.cs" />
     <Compile Include="AST\WhileStmtNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

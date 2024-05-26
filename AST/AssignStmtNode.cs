@@ -10,11 +10,10 @@ namespace COMPILATAR_V1._0.AST
 	{
 		public string VarName { get; set; }
 		public ASTNode Expression { get; set; }
-		public AssignStmtNode(string varName, ASTNode expression)
+
+		public AssignStmtNode()
 		{
 			Type = "AssignStmt";
-			VarName = varName;
-			Expression = expression;
 		}
 	}
 }

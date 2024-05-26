@@ -5,6 +5,56 @@
       "Type": "BeginStmt",
       "Children": [
         {
+          "Type": "VarBlock",
+          "Children": [
+            {
+              "Value": "x",
+              "Type": "Variable",
+              "Children": []
+            },
+            {
+              "Value": "squ",
+              "Type": "Variable",
+              "Children": []
+            }
+          ]
+        },
+        {
+          "Name": "square",
+          "Body": {
+            "Type": "BeginStmt",
+            "Children": [
+              {
+                "Type": "BeginStmt",
+                "Children": [
+                  {
+                    "VarName": "squ",
+                    "Expression": {
+                      "Left": {
+                        "Value": "x",
+                        "Type": "Variable",
+                        "Children": []
+                      },
+                      "Operator": "*",
+                      "Right": {
+                        "Value": "x",
+                        "Type": "Variable",
+                        "Children": []
+                      },
+                      "Type": "Expression",
+                      "Children": []
+                    },
+                    "Type": "AssignStmt",
+                    "Children": []
+                  }
+                ]
+              }
+            ]
+          },
+          "Type": "Procedure",
+          "Children": []
+        },
+        {
           "Type": "BeginStmt",
           "Children": [
             {
