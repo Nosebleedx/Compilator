@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace COMPILATAR_V1._0.AST
 {
-	public class NumberNode : ASTNode
+	public class WhileStmtNode : ASTNode
 	{
-		public string Value { get; set; }
+		public ASTNode Condition { get; set; }
+		public ASTNode Body { get; set; }
 
-		public NumberNode()
+		public WhileStmtNode()
 		{
-			Type = "Number";
+			Type = "WhileStmt";
 		}
 	}
 }

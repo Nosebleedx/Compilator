@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace COMPILATAR_V1._0.AST
 {
-	public class VarNode : ASTNode
+	public class VariableNode : ASTNode
 	{
-		public string Name { get; set; }
-		public VarNode(string name)
+		public string Value { get; set; }
+
+		public VariableNode()
 		{
-			Type = "Var";
-			Name = name;
+			Type = "Variable";
 		}
 	}
 }
