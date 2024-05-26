@@ -5,45 +5,81 @@
       "Type": "BeginStmt",
       "Children": [
         {
-          "VarName": "x",
-          "Expression": {
-            "Type": "Expression",
-            "Children": [
-              {
-                "Value": "1",
-                "Type": "Number",
-                "Children": []
-              }
-            ]
-          },
-          "Type": "AssignStmt",
-          "Children": []
-        },
-        {
           "Type": "BeginStmt",
           "Children": [
             {
-              "Type": "Expression",
+              "VarName": "x",
+              "Expression": {
+                "Value": "1",
+                "Type": "Number",
+                "Children": []
+              },
+              "Type": "AssignStmt",
               "Children": []
             },
             {
-              "VarName": "x",
-              "Expression": {
+              "Condition": {
+                "Left": {
+                  "Value": "x",
+                  "Type": "Variable",
+                  "Children": []
+                },
+                "Operator": "<=",
+                "Right": {
+                  "Value": "10",
+                  "Type": "Number",
+                  "Children": []
+                },
                 "Type": "Expression",
+                "Children": []
+              },
+              "Body": {
+                "Type": "BeginStmt",
                 "Children": [
                   {
-                    "Value": "1",
-                    "Type": "Number",
+                    "ProcedureName": "square",
+                    "Type": "CallStmt",
+                    "Children": []
+                  },
+                  {
+                    "Expression": {
+                      "Value": "squ",
+                      "Type": "Variable",
+                      "Children": []
+                    },
+                    "Type": "PrintStmt",
+                    "Children": []
+                  },
+                  {
+                    "VarName": "x",
+                    "Expression": {
+                      "Left": {
+                        "Value": "x",
+                        "Type": "Variable",
+                        "Children": []
+                      },
+                      "Operator": "+",
+                      "Right": {
+                        "Value": "1",
+                        "Type": "Number",
+                        "Children": []
+                      },
+                      "Type": "Expression",
+                      "Children": []
+                    },
+                    "Type": "AssignStmt",
                     "Children": []
                   }
                 ]
               },
-              "Type": "AssignStmt",
+              "Type": "WhileStmt",
               "Children": []
             }
           ]
         }
       ]
-    }
+    },
+    null,
+    null
   ]
 }

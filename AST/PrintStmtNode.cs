@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace COMPILATAR_V1._0.AST
 {
-	public class ASTNode
+	public class PrintStmtNode : ASTNode
 	{
-		public string Type { get; set; }
-		public List<ASTNode> Children { get; set; } = new List<ASTNode>();
-		
+		public ASTNode Expression { get; set; }
+		public PrintStmtNode()
+		{
+			Type = "PrintStmt";
+		}
 	}
 }

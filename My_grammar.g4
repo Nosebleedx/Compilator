@@ -21,8 +21,11 @@ procedure
     ;
 
 stat
-    : (assignstmt | callstmt | writestmt | qstmt | bangstmt | beginstmt | ifstmt | whilestmt)?
+    : (assignstmt | callstmt | writestmt | qstmt | beginstmt | ifstmt | whilestmt | printstmt)?
     ;
+
+printstmt 
+    : '!' expression ;
 
 assignstmt
     : ident ':=' expression
@@ -40,9 +43,6 @@ qstmt
     : '?' ident
     ;
 
-bangstmt
-    : '!' expression
-    ;
 
 beginstmt
     : BEGIN stat (';' stat)* END

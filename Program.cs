@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using COMPILATAR_V1._0.AST;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace COMPILATAR_V1._0
 		static void Main(string[] args)
 		{
 			AntlrFileStream antlrInputStream = new AntlrFileStream("programm_text.txt", Encoding.UTF8);
-            Console.WriteLine($"programm_text: \n {antlrInputStream} \n \n");
+            Console.WriteLine($"programm_text:\n{antlrInputStream} \n \n");
             My_grammarLexer lexer = new My_grammarLexer(antlrInputStream);
 
 			IToken token1;
