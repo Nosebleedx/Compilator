@@ -1,14 +1,19 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Formatting = Newtonsoft.Json.Formatting;
+
 
 namespace COMPILATAR_V1._0
 {
-	internal class Program
+	public class Program
 	{
 		//static public List<Dictionary<>>
 
@@ -28,17 +33,15 @@ namespace COMPILATAR_V1._0
 			// устанавливаю на позицию 0
 			lexer.Reset();
 
-
 			CommonTokenStream commonToken = new CommonTokenStream(lexer);
 
 			My_grammarParser parser = new My_grammarParser(commonToken);
 
 			IParseTree tree = parser.prog();
-
-			Visitor visitor = new Visitor();
-            
-            visitor.Visit(tree);
-
+			ASTBuilder visitor = new ASTBuilder();
+			ASTNode ast = visitor.Visit(tree);
+			var json = JsonConvert.SerializeObject(ast, Formatting.Indented);
+			File.WriteAllText(@"C:\Users\Дмитрий\source\repos\COMPILATAR_V1.0\ast.json", json);
 		}
 	}
 }

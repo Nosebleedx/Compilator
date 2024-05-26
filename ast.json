@@ -1,0 +1,49 @@
+{
+  "Type": "Program",
+  "Children": [
+    {
+      "Type": "BeginStmt",
+      "Children": [
+        {
+          "VarName": "x",
+          "Expression": {
+            "Type": "Expression",
+            "Children": [
+              {
+                "Value": "1",
+                "Type": "Number",
+                "Children": []
+              }
+            ]
+          },
+          "Type": "AssignStmt",
+          "Children": []
+        },
+        {
+          "Type": "BeginStmt",
+          "Children": [
+            {
+              "Type": "Expression",
+              "Children": []
+            },
+            {
+              "VarName": "x",
+              "Expression": {
+                "Type": "Expression",
+                "Children": [
+                  {
+                    "Value": "1",
+                    "Type": "Number",
+                    "Children": []
+                  }
+                ]
+              },
+              "Type": "AssignStmt",
+              "Children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
