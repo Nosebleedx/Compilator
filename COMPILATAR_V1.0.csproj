@@ -96,8 +96,8 @@
     <Compile Include="AST\ConstNode.cs" />
     <Compile Include="AST\ExpressionNode.cs" />
     <Compile Include="AST\IfStmtNode.cs" />
+    <Compile Include="AST\InputStmtNode.cs" />
     <Compile Include="AST\NumberNode.cs" />
-    <Compile Include="AST\OddConditionNode.cs" />
     <Compile Include="AST\PrintStmtNode.cs" />
     <Compile Include="AST\ProcedureNode.cs" />
     <Compile Include="AST\ProgramNode.cs" />

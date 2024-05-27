@@ -110,7 +110,11 @@ namespace COMPILATAR_V1._0
 			var callNode = new CallStmtNode(procedureName);
 			return callNode;
 		}
-
+		public override ASTNode VisitQstmt([NotNull] My_grammarParser.QstmtContext context)
+		{
+			var varName = Visit(context.ident());
+			return new InputStmtNode { Expression = varName };
+		}
 		public override ASTNode VisitPrintstmt([NotNull] My_grammarParser.PrintstmtContext context)
 		{
 			var expression = Visit(context.expression());
@@ -163,7 +167,7 @@ namespace COMPILATAR_V1._0
 			}
 			throw new InvalidOperationException("Неизвестное условие");
 		}
-
+		
 		public override ASTNode VisitTerm([NotNull] My_grammarParser.TermContext context)
 		{
 			ASTNode node = Visit(context.factor(0));

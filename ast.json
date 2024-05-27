@@ -689,13 +689,21 @@
           "Type": "BeginStmt",
           "Children": [
             {
-              "Value": "x",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "x",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
-              "Value": "y",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "y",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
@@ -713,13 +721,21 @@
               "Children": []
             },
             {
-              "Value": "x",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "x",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
-              "Value": "y",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "y",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
@@ -746,13 +762,21 @@
               "Children": []
             },
             {
-              "Value": "x",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "x",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
-              "Value": "y",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "y",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
@@ -770,8 +794,12 @@
               "Children": []
             },
             {
-              "Value": "n",
-              "Type": "Variable",
+              "Expression": {
+                "Value": "n",
+                "Type": "Variable",
+                "Children": []
+              },
+              "Type": "InputStmt",
               "Children": []
             },
             {
