@@ -20,7 +20,7 @@ namespace COMPILATAR_V1._0
 
 		static void Main(string[] args)
 		{
-			AntlrFileStream antlrInputStream = new AntlrFileStream("programm_text.txt", Encoding.UTF8);
+			AntlrFileStream antlrInputStream = new AntlrFileStream("third_example.txt", Encoding.UTF8);
             Console.WriteLine($"programm_text:\n{antlrInputStream} \n \n");
             My_grammarLexer lexer = new My_grammarLexer(antlrInputStream);
 
