@@ -54,6 +54,44 @@ namespace COMPILATAR_V1._0
 		}
 
 
+		public override ASTNode VisitConsts(My_grammarParser.ConstsContext context)
+		{
+			var constBlockNode = new ConstBlockNode();
+
+			foreach (var constDecl in context.const_decl())
+			{
+				var constNode = Visit(constDecl) as ConstNode;
+				if (constNode != null)
+				{
+					constBlockNode.Children.Add(constNode);
+				}
+			}
+
+			return constBlockNode;
+		}
+
+		public override ASTNode VisitConst_decl(My_grammarParser.Const_declContext context)
+		{
+			var constNode = new ConstNode
+			{
+				VarName = context.ident().GetText(),
+				Value = context.number().GetText()
+			};
+
+			return constNode;
+		}
+		public override ASTNode VisitWritestmt([NotNull] My_grammarParser.WritestmtContext context)
+		{
+			var writeStmtNode = new WriteStmtNode
+			{
+				Expression = Visit(context.ident()) // Assuming the write statement writes an identifier
+			};
+
+			return writeStmtNode;
+		}
+
+		
+
 		public override ASTNode VisitAssignstmt([NotNull] My_grammarParser.AssignstmtContext context)
 		{
 			var varName = context.ident().GetText();
@@ -80,6 +118,19 @@ namespace COMPILATAR_V1._0
 			return printNode;
 		}
 
+		public override ASTNode VisitIfstmt([NotNull] My_grammarParser.IfstmtContext context)
+		{
+			var ifStmtNode = new IfStmtNode();
+
+			// Visit the condition and add it to the IfStmtNode
+			ifStmtNode.Condition = Visit(context.condition());
+
+			// Visit the then statement and add it to the IfStmtNode
+			ifStmtNode.ThenStatement = Visit(context.stat());
+
+			return ifStmtNode;
+		}
+		
 		public override ASTNode VisitWhilestmt([NotNull] My_grammarParser.WhilestmtContext context)
 		{
 			var condition = Visit(context.condition());
@@ -95,6 +146,7 @@ namespace COMPILATAR_V1._0
 
 		public override ASTNode VisitCondition([NotNull] My_grammarParser.ConditionContext context)
 		{
+
 			if (context.children.Count == 3)
 			{
 				var left = Visit(context.children[0]);
@@ -110,6 +162,53 @@ namespace COMPILATAR_V1._0
 				return conditionNode;
 			}
 			throw new InvalidOperationException("Неизвестное условие");
+		}
+
+		public override ASTNode VisitTerm([NotNull] My_grammarParser.TermContext context)
+		{
+			ASTNode node = Visit(context.factor(0));
+
+			for (int i = 1; i < context.factor().Length; i++)
+			{
+				var operatorToken = context.GetChild(2 * i - 1).GetText();
+				var rightNode = Visit(context.factor(i));
+
+				node = new ExpressionNode
+				{
+					Left = node,
+					Operator = operatorToken,
+					Right = rightNode,
+					Type = "Expression"
+				};
+			}
+
+			return node;
+		}
+
+		public override ASTNode VisitFactor([NotNull] My_grammarParser.FactorContext context)
+		{
+			if (context.ident() != null)
+			{
+				return new VariableNode
+				{
+					Value = context.ident().GetText(),
+					Type = "Variable"
+				};
+			}
+			else if (context.number() != null)
+			{
+				return new NumberNode
+				{
+					Value = context.number().GetText(),
+					Type = "Number"
+				};
+			}
+			else if (context.expression() != null)
+			{
+				return Visit(context.expression());
+			}
+
+			throw new Exception("Unsupported factor type");
 		}
 
 		public override ASTNode VisitExpression([NotNull] My_grammarParser.ExpressionContext context)
@@ -183,52 +282,7 @@ namespace COMPILATAR_V1._0
 
 			return varBlockNode;
 		}
-		public override ASTNode VisitTerm([NotNull] My_grammarParser.TermContext context)
-		{
-			ASTNode node = Visit(context.factor(0));
-
-			for (int i = 1; i < context.factor().Length; i++)
-			{
-				var operatorToken = context.GetChild(2 * i - 1).GetText();
-				var rightNode = Visit(context.factor(i));
-
-				node = new ExpressionNode
-				{
-					Left = node,
-					Operator = operatorToken,
-					Right = rightNode,
-					Type = "Expression"
-				};
-			}
-
-			return node;
-		}
-
-		public override ASTNode VisitFactor([NotNull] My_grammarParser.FactorContext context)
-		{
-			if (context.ident() != null)
-			{
-				return new VariableNode
-				{
-					Value = context.ident().GetText(),
-					Type = "Variable"
-				};
-			}
-			else if (context.number() != null)
-			{
-				return new NumberNode
-				{
-					Value = context.number().GetText(),
-					Type = "Number"
-				};
-			}
-			else if (context.expression() != null)
-			{
-				return Visit(context.expression());
-			}
-
-			throw new Exception("Unsupported factor type");
-		}
+		
 		public override ASTNode VisitProcedure([NotNull] My_grammarParser.ProcedureContext context)
 		{	
 			// Создаем узел для процедуры

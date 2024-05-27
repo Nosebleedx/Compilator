@@ -9,7 +9,11 @@ block
     ;
 
 consts
-    : CONST ident '=' number (',' ident '=' number)* ';'
+    : CONST const_decl (',' const_decl)* ';'
+    ;
+
+const_decl
+    : ident ':=' number
     ;
 
 vars_
@@ -43,7 +47,6 @@ qstmt
     : '?' ident
     ;
 
-
 beginstmt
     : BEGIN stat (';' stat)* END
     ;
@@ -57,8 +60,7 @@ whilestmt
     ;
 
 condition
-    : ODD expression
-    | expression ('=' | '#' | '<' | '<=' | '>' | '>=') expression
+    : expression ('=' | '#' | '<' | '<=' | '>' | '>=' | '!=') expression
     ;
 
 expression
@@ -66,7 +68,7 @@ expression
     ;
 
 term
-    : factor (('*' | '/') factor)*
+    : factor (( '*' | '/' | '%' ) factor)*
     ;
 
 factor
@@ -101,10 +103,6 @@ IF
 
 THEN
     : 'THEN'
-    ;
-
-ODD
-    : 'ODD'
     ;
 
 BEGIN

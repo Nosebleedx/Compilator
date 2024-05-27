@@ -92,8 +92,12 @@
     <Compile Include="AST\ASTNode.cs" />
     <Compile Include="AST\BeginStmtNode.cs" />
     <Compile Include="AST\CallStmtNode.cs" />
+    <Compile Include="AST\ConstBlockNode.cs" />
+    <Compile Include="AST\ConstNode.cs" />
     <Compile Include="AST\ExpressionNode.cs" />
+    <Compile Include="AST\IfStmtNode.cs" />
     <Compile Include="AST\NumberNode.cs" />
+    <Compile Include="AST\OddConditionNode.cs" />
     <Compile Include="AST\PrintStmtNode.cs" />
     <Compile Include="AST\ProcedureNode.cs" />
     <Compile Include="AST\ProgramNode.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="AST\VariableNode.cs" />
     <Compile Include="AST\VarsNode.cs" />
     <Compile Include="AST\WhileStmtNode.cs" />
+    <Compile Include="AST\WriteStmtNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\programm_text.txt" />
+    <Content Include="bin\Debug\second_example.txt" />
+    <Content Include="bin\Debug\third_example.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
