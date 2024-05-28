@@ -1,0 +1,14 @@
+Label Label0
+StoreVar squ
+Ret
+StoreVar x
+Label Label1
+JmpIfLessOrEqual
+JmpIfFalse Label2
+Call square
+Print
+Add
+StoreVar x
+Jmp Label1
+Label Label2
+Halt

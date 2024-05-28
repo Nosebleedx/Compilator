@@ -110,7 +110,11 @@ namespace COMPILATAR_V1._0
 			var callNode = new CallStmtNode(procedureName);
 			return callNode;
 		}
-
+		public override ASTNode VisitQstmt([NotNull] My_grammarParser.QstmtContext context)
+		{
+			var varName = Visit(context.ident());
+			return new InputStmtNode { Expression = varName };
+		}
 		public override ASTNode VisitPrintstmt([NotNull] My_grammarParser.PrintstmtContext context)
 		{
 			var expression = Visit(context.expression());
@@ -163,7 +167,7 @@ namespace COMPILATAR_V1._0
 			}
 			throw new InvalidOperationException("Неизвестное условие");
 		}
-
+		
 		public override ASTNode VisitTerm([NotNull] My_grammarParser.TermContext context)
 		{
 			ASTNode node = Visit(context.factor(0));
@@ -197,11 +201,20 @@ namespace COMPILATAR_V1._0
 			}
 			else if (context.number() != null)
 			{
-				return new NumberNode
+				// Преобразование текста числа в числовое значение
+				if (int.TryParse(context.number().GetText(), out int numberValue))
 				{
-					Value = context.number().GetText(),
-					Type = "Number"
-				};
+					return new NumberNode
+					{
+						Value = numberValue,
+						Type = "Number"
+					};
+				}
+				else
+				{
+					// Обработка ошибки в случае невозможности преобразования текста в число
+					throw new Exception("Invalid number format");
+				}
 			}
 			else if (context.expression() != null)
 			{
@@ -210,6 +223,7 @@ namespace COMPILATAR_V1._0
 
 			throw new Exception("Unsupported factor type");
 		}
+
 
 		public override ASTNode VisitExpression([NotNull] My_grammarParser.ExpressionContext context)
 		{
@@ -234,7 +248,7 @@ namespace COMPILATAR_V1._0
 				// Handle unary minus
 				node = new ExpressionNode
 				{
-					Left = new NumberNode { Value = "0", Type = "Number" },
+					Left = new NumberNode { Value = 0},
 					Operator = "-",
 					Right = node,
 					Type = "Expression"
@@ -256,8 +270,20 @@ namespace COMPILATAR_V1._0
 
 		public override ASTNode VisitNumber([NotNull] My_grammarParser.NumberContext context)
 		{
-			return new NumberNode { Value = context.GetText() };
+			// Проверяем, является ли текст контекста числом
+			if (int.TryParse(context.GetText(), out int number))
+			{
+				// Если текст контекста можно преобразовать в число, создаем узел для числа
+				return new NumberNode { Value = number };
+			}
+			else
+			{
+				// Если текст контекста не является числом, выбрасываем исключение или выполняем другую обработку по вашему усмотрению
+				throw new InvalidOperationException("Invalid number format");
+			}
 		}
+
+
 
 		public override ASTNode VisitIdent([NotNull] My_grammarParser.IdentContext context)
 		{

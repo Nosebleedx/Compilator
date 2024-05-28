@@ -13,596 +13,14 @@
               "Children": []
             },
             {
-              "Value": "y",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "z",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "q",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "r",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "n",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "f",
+              "Value": "squ",
               "Type": "Variable",
               "Children": []
             }
           ]
         },
         {
-          "Name": "multiply",
-          "Body": {
-            "Type": "BeginStmt",
-            "Children": [
-              {
-                "Type": "VarBlock",
-                "Children": [
-                  {
-                    "Value": "a",
-                    "Type": "Variable",
-                    "Children": []
-                  },
-                  {
-                    "Value": "b",
-                    "Type": "Variable",
-                    "Children": []
-                  }
-                ]
-              },
-              {
-                "Type": "BeginStmt",
-                "Children": [
-                  {
-                    "VarName": "a",
-                    "Expression": {
-                      "Value": "x",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "b",
-                    "Expression": {
-                      "Value": "Y",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "z",
-                    "Expression": {
-                      "Value": "0",
-                      "Type": "Number",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "Condition": {
-                      "Left": {
-                        "Value": "b",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Operator": ">",
-                      "Right": {
-                        "Value": "0",
-                        "Type": "Number",
-                        "Children": []
-                      },
-                      "Type": "Expression",
-                      "Children": []
-                    },
-                    "Body": {
-                      "Type": "BeginStmt",
-                      "Children": [
-                        {
-                          "Condition": {
-                            "Left": {
-                              "Left": {
-                                "Value": "b",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Operator": "%",
-                              "Right": {
-                                "Value": "2",
-                                "Type": "Number",
-                                "Children": []
-                              },
-                              "Type": "Expression",
-                              "Children": []
-                            },
-                            "Operator": "!=",
-                            "Right": {
-                              "Value": "0",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "ThenStatement": {
-                            "VarName": "z",
-                            "Expression": {
-                              "Left": {
-                                "Value": "z",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Operator": "+",
-                              "Right": {
-                                "Value": "a",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Type": "Expression",
-                              "Children": []
-                            },
-                            "Type": "AssignStmt",
-                            "Children": []
-                          },
-                          "Type": "IfStmt",
-                          "Children": []
-                        },
-                        {
-                          "VarName": "a",
-                          "Expression": {
-                            "Left": {
-                              "Value": "2",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Operator": "*",
-                            "Right": {
-                              "Value": "a",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        },
-                        {
-                          "VarName": "b",
-                          "Expression": {
-                            "Left": {
-                              "Value": "b",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "/",
-                            "Right": {
-                              "Value": "2",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        }
-                      ]
-                    },
-                    "Type": "WhileStmt",
-                    "Children": []
-                  }
-                ]
-              }
-            ]
-          },
-          "Type": "Procedure",
-          "Children": []
-        },
-        {
-          "Name": "divide",
-          "Body": {
-            "Type": "BeginStmt",
-            "Children": [
-              {
-                "Type": "VarBlock",
-                "Children": [
-                  {
-                    "Value": "w",
-                    "Type": "Variable",
-                    "Children": []
-                  }
-                ]
-              },
-              {
-                "Type": "BeginStmt",
-                "Children": [
-                  {
-                    "VarName": "r",
-                    "Expression": {
-                      "Value": "x",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "q",
-                    "Expression": {
-                      "Value": "0",
-                      "Type": "Number",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "w",
-                    "Expression": {
-                      "Value": "y",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "Condition": {
-                      "Left": {
-                        "Value": "w",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Operator": "<=",
-                      "Right": {
-                        "Value": "r",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Type": "Expression",
-                      "Children": []
-                    },
-                    "Body": {
-                      "VarName": "w",
-                      "Expression": {
-                        "Left": {
-                          "Value": "2",
-                          "Type": "Number",
-                          "Children": []
-                        },
-                        "Operator": "*",
-                        "Right": {
-                          "Value": "w",
-                          "Type": "Variable",
-                          "Children": []
-                        },
-                        "Type": "Expression",
-                        "Children": []
-                      },
-                      "Type": "AssignStmt",
-                      "Children": []
-                    },
-                    "Type": "WhileStmt",
-                    "Children": []
-                  },
-                  {
-                    "Condition": {
-                      "Left": {
-                        "Value": "w",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Operator": ">",
-                      "Right": {
-                        "Value": "y",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Type": "Expression",
-                      "Children": []
-                    },
-                    "Body": {
-                      "Type": "BeginStmt",
-                      "Children": [
-                        {
-                          "VarName": "q",
-                          "Expression": {
-                            "Left": {
-                              "Value": "2",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Operator": "*",
-                            "Right": {
-                              "Value": "q",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        },
-                        {
-                          "VarName": "w",
-                          "Expression": {
-                            "Left": {
-                              "Value": "w",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "/",
-                            "Right": {
-                              "Value": "2",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        },
-                        {
-                          "Condition": {
-                            "Left": {
-                              "Value": "w",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "<=",
-                            "Right": {
-                              "Value": "r",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "ThenStatement": {
-                            "Type": "BeginStmt",
-                            "Children": [
-                              {
-                                "VarName": "r",
-                                "Expression": {
-                                  "Left": {
-                                    "Value": "r",
-                                    "Type": "Variable",
-                                    "Children": []
-                                  },
-                                  "Operator": "-",
-                                  "Right": {
-                                    "Value": "w",
-                                    "Type": "Variable",
-                                    "Children": []
-                                  },
-                                  "Type": "Expression",
-                                  "Children": []
-                                },
-                                "Type": "AssignStmt",
-                                "Children": []
-                              },
-                              {
-                                "VarName": "q",
-                                "Expression": {
-                                  "Left": {
-                                    "Value": "q",
-                                    "Type": "Variable",
-                                    "Children": []
-                                  },
-                                  "Operator": "+",
-                                  "Right": {
-                                    "Value": "1",
-                                    "Type": "Number",
-                                    "Children": []
-                                  },
-                                  "Type": "Expression",
-                                  "Children": []
-                                },
-                                "Type": "AssignStmt",
-                                "Children": []
-                              }
-                            ]
-                          },
-                          "Type": "IfStmt",
-                          "Children": []
-                        }
-                      ]
-                    },
-                    "Type": "WhileStmt",
-                    "Children": []
-                  }
-                ]
-              }
-            ]
-          },
-          "Type": "Procedure",
-          "Children": []
-        },
-        {
-          "Name": "gcd",
-          "Body": {
-            "Type": "BeginStmt",
-            "Children": [
-              {
-                "Type": "VarBlock",
-                "Children": [
-                  {
-                    "Value": "f",
-                    "Type": "Variable",
-                    "Children": []
-                  },
-                  {
-                    "Value": "g",
-                    "Type": "Variable",
-                    "Children": []
-                  }
-                ]
-              },
-              {
-                "Type": "BeginStmt",
-                "Children": [
-                  {
-                    "VarName": "f",
-                    "Expression": {
-                      "Value": "x",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "g",
-                    "Expression": {
-                      "Value": "y",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  },
-                  {
-                    "Condition": {
-                      "Left": {
-                        "Value": "f",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Operator": "#",
-                      "Right": {
-                        "Value": "g",
-                        "Type": "Variable",
-                        "Children": []
-                      },
-                      "Type": "Expression",
-                      "Children": []
-                    },
-                    "Body": {
-                      "Type": "BeginStmt",
-                      "Children": [
-                        {
-                          "Condition": {
-                            "Left": {
-                              "Value": "f",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "<",
-                            "Right": {
-                              "Value": "g",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "ThenStatement": {
-                            "VarName": "g",
-                            "Expression": {
-                              "Left": {
-                                "Value": "g",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Operator": "-",
-                              "Right": {
-                                "Value": "f",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Type": "Expression",
-                              "Children": []
-                            },
-                            "Type": "AssignStmt",
-                            "Children": []
-                          },
-                          "Type": "IfStmt",
-                          "Children": []
-                        },
-                        {
-                          "Condition": {
-                            "Left": {
-                              "Value": "g",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "<",
-                            "Right": {
-                              "Value": "f",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "ThenStatement": {
-                            "VarName": "f",
-                            "Expression": {
-                              "Left": {
-                                "Value": "f",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Operator": "-",
-                              "Right": {
-                                "Value": "g",
-                                "Type": "Variable",
-                                "Children": []
-                              },
-                              "Type": "Expression",
-                              "Children": []
-                            },
-                            "Type": "AssignStmt",
-                            "Children": []
-                          },
-                          "Type": "IfStmt",
-                          "Children": []
-                        }
-                      ]
-                    },
-                    "Type": "WhileStmt",
-                    "Children": []
-                  },
-                  {
-                    "VarName": "z",
-                    "Expression": {
-                      "Value": "f",
-                      "Type": "Variable",
-                      "Children": []
-                    },
-                    "Type": "AssignStmt",
-                    "Children": []
-                  }
-                ]
-              }
-            ]
-          },
-          "Type": "Procedure",
-          "Children": []
-        },
-        {
-          "Name": "fact",
+          "Name": "square",
           "Body": {
             "Type": "BeginStmt",
             "Children": [
@@ -610,72 +28,23 @@
                 "Type": "BeginStmt",
                 "Children": [
                   {
-                    "Condition": {
+                    "VarName": "squ",
+                    "Expression": {
                       "Left": {
-                        "Value": "n",
+                        "Value": "x",
                         "Type": "Variable",
                         "Children": []
                       },
-                      "Operator": ">",
+                      "Operator": "*",
                       "Right": {
-                        "Value": "1",
-                        "Type": "Number",
+                        "Value": "x",
+                        "Type": "Variable",
                         "Children": []
                       },
                       "Type": "Expression",
                       "Children": []
                     },
-                    "ThenStatement": {
-                      "Type": "BeginStmt",
-                      "Children": [
-                        {
-                          "VarName": "f",
-                          "Expression": {
-                            "Left": {
-                              "Value": "n",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "*",
-                            "Right": {
-                              "Value": "f",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        },
-                        {
-                          "VarName": "n",
-                          "Expression": {
-                            "Left": {
-                              "Value": "n",
-                              "Type": "Variable",
-                              "Children": []
-                            },
-                            "Operator": "-",
-                            "Right": {
-                              "Value": "1",
-                              "Type": "Number",
-                              "Children": []
-                            },
-                            "Type": "Expression",
-                            "Children": []
-                          },
-                          "Type": "AssignStmt",
-                          "Children": []
-                        },
-                        {
-                          "ProcedureName": "fact",
-                          "Type": "CallStmt",
-                          "Children": []
-                        }
-                      ]
-                    },
-                    "Type": "IfStmt",
+                    "Type": "AssignStmt",
                     "Children": []
                   }
                 ]
@@ -689,95 +58,9 @@
           "Type": "BeginStmt",
           "Children": [
             {
-              "Value": "x",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "y",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "ProcedureName": "multiply",
-              "Type": "CallStmt",
-              "Children": []
-            },
-            {
+              "VarName": "x",
               "Expression": {
-                "Value": "z",
-                "Type": "Variable",
-                "Children": []
-              },
-              "Type": "PrintStmt",
-              "Children": []
-            },
-            {
-              "Value": "x",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "y",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "ProcedureName": "divide",
-              "Type": "CallStmt",
-              "Children": []
-            },
-            {
-              "Expression": {
-                "Value": "q",
-                "Type": "Variable",
-                "Children": []
-              },
-              "Type": "PrintStmt",
-              "Children": []
-            },
-            {
-              "Expression": {
-                "Value": "r",
-                "Type": "Variable",
-                "Children": []
-              },
-              "Type": "PrintStmt",
-              "Children": []
-            },
-            {
-              "Value": "x",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "Value": "y",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "ProcedureName": "gcd",
-              "Type": "CallStmt",
-              "Children": []
-            },
-            {
-              "Expression": {
-                "Value": "z",
-                "Type": "Variable",
-                "Children": []
-              },
-              "Type": "PrintStmt",
-              "Children": []
-            },
-            {
-              "Value": "n",
-              "Type": "Variable",
-              "Children": []
-            },
-            {
-              "VarName": "f",
-              "Expression": {
-                "Value": "1",
+                "Value": 1,
                 "Type": "Number",
                 "Children": []
               },
@@ -785,17 +68,61 @@
               "Children": []
             },
             {
-              "ProcedureName": "fact",
-              "Type": "CallStmt",
-              "Children": []
-            },
-            {
-              "Expression": {
-                "Value": "f",
-                "Type": "Variable",
+              "Condition": {
+                "Left": {
+                  "Value": "x",
+                  "Type": "Variable",
+                  "Children": []
+                },
+                "Operator": "<=",
+                "Right": {
+                  "Value": 10,
+                  "Type": "Number",
+                  "Children": []
+                },
+                "Type": "Expression",
                 "Children": []
               },
-              "Type": "PrintStmt",
+              "Body": {
+                "Type": "BeginStmt",
+                "Children": [
+                  {
+                    "ProcedureName": "square",
+                    "Type": "CallStmt",
+                    "Children": []
+                  },
+                  {
+                    "Expression": {
+                      "Value": "squ",
+                      "Type": "Variable",
+                      "Children": []
+                    },
+                    "Type": "PrintStmt",
+                    "Children": []
+                  },
+                  {
+                    "VarName": "x",
+                    "Expression": {
+                      "Left": {
+                        "Value": "x",
+                        "Type": "Variable",
+                        "Children": []
+                      },
+                      "Operator": "+",
+                      "Right": {
+                        "Value": 1,
+                        "Type": "Number",
+                        "Children": []
+                      },
+                      "Type": "Expression",
+                      "Children": []
+                    },
+                    "Type": "AssignStmt",
+                    "Children": []
+                  }
+                ]
+              },
+              "Type": "WhileStmt",
               "Children": []
             }
           ]
