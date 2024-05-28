@@ -8,7 +8,7 @@ namespace COMPILATAR_V1._0.AST
 {
 	public class NumberNode : ASTNode
 	{
-		public string Value { get; set; }
+		public int Value { get; set; }
 
 		public NumberNode()
 		{
