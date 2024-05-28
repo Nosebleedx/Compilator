@@ -70,6 +70,45 @@ namespace COMPILATAR_V1._0
 			{
 				switch (instruction.OpCode)
 				{
+					case OpCode.Halt:
+						ilGenerator.Emit(OpCodes.Ret);
+						break;
+
+					case OpCode.StoreVar:
+						ilGenerator.Emit(OpCodes.Stloc, instruction.Operand);
+						break;
+
+					case OpCode.Input:
+						ilGenerator.Emit(OpCodes.Call, typeof(Console).GetMethod("ReadLine", Type.EmptyTypes));
+						ilGenerator.Emit(OpCodes.Call, typeof(int).GetMethod("Parse", new Type[] { typeof(string) }));
+						ilGenerator.Emit(OpCodes.Stloc, int.Parse(instruction.Operand));
+						break;
+
+					case OpCode.Print:
+						ilGenerator.Emit(OpCodes.Ldloc, int.Parse(instruction.Operand));
+						ilGenerator.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(int) }));
+						break;
+
+					case OpCode.Add:
+						ilGenerator.Emit(OpCodes.Add);
+						break;
+
+					case OpCode.Sub:
+						ilGenerator.Emit(OpCodes.Sub);
+						break;
+
+					case OpCode.Mul:
+						ilGenerator.Emit(OpCodes.Mul);
+						break;
+
+					case OpCode.Div:
+						ilGenerator.Emit(OpCodes.Div);
+						break;
+
+					case OpCode.Mod:
+						ilGenerator.Emit(OpCodes.Rem);
+						break;
+
 					case OpCode.LoadConst:
 						if (int.TryParse(instruction.Operand, out int constValue))
 						{
@@ -80,71 +119,135 @@ namespace COMPILATAR_V1._0
 							Console.WriteLine($"Такого нет {instruction.Operand}");
 						}
 						break;
-					case OpCode.Add:
-						ilGenerator.Emit(OpCodes.Add);
+
+					case OpCode.JmpIf:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Brtrue, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Sub:
-						ilGenerator.Emit(OpCodes.Sub);
+
+					case OpCode.JmpIfLess:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Blt, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Mul:
-						ilGenerator.Emit(OpCodes.Mul);
+
+					case OpCode.JmpIfLessOrEqual:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Ble, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Div:
-						ilGenerator.Emit(OpCodes.Div);
+
+					case OpCode.JmpIfGreater:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Bgt, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Mod:
-						ilGenerator.Emit(OpCodes.Rem);
+
+					case OpCode.JmpIfGreaterOrEqual:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Bge, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.StoreVar:
-						ilGenerator.Emit(OpCodes.Stloc, int.Parse(instruction.Operand));
+
+					case OpCode.JmpIfEqual:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Beq, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Input:
-						ilGenerator.Emit(OpCodes.Call, typeof(Console).GetMethod("ReadLine", Type.EmptyTypes));
-						ilGenerator.Emit(OpCodes.Call, typeof(int).GetMethod("Parse", new Type[] { typeof(string) }));
-						ilGenerator.Emit(OpCodes.Stloc, int.Parse(instruction.Operand));
+
+					case OpCode.JmpIfNotEqual:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Bne_Un, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
-					case OpCode.Print:
-						ilGenerator.Emit(OpCodes.Ldloc, int.Parse(instruction.Operand));
-						ilGenerator.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(int) }));
+
+					case OpCode.JmpIfFalse:
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Brfalse, labels[instruction.Operand]);
+						}
+						else
+						{
+							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
+						}
 						break;
+
 					case OpCode.Jmp:
-						var label = ilGenerator.DefineLabel();
-						labels[instruction.Operand] = label; // Добавляем метку в словарь
-						ilGenerator.Emit(OpCodes.Br, label);
+						if (labels.ContainsKey(instruction.Operand))
+						{
+							ilGenerator.Emit(OpCodes.Br, labels[instruction.Operand]);
+						}
+						else
+						{
+							var label = ilGenerator.DefineLabel();
+							labels[instruction.Operand] = label;
+							ilGenerator.Emit(OpCodes.Br, label);
+						}
 						break;
 
 					case OpCode.Label:
 						if (labels.ContainsKey(instruction.Operand))
 						{
-							var existingLabel = labels[instruction.Operand]; // Получаем ранее определенную метку
-							ilGenerator.MarkLabel(existingLabel);
+							ilGenerator.MarkLabel(labels[instruction.Operand]);
 						}
 						else
 						{
-							var newLabel = ilGenerator.DefineLabel(); // Определение новой метки
-							labels.Add(instruction.Operand, newLabel); // Добавление метки в словарь
-							ilGenerator.MarkLabel(newLabel); // Помечаем метку в IL-генераторе
+							var newLabel = ilGenerator.DefineLabel();
+							labels[instruction.Operand] = newLabel;
+							ilGenerator.MarkLabel(newLabel);
 						}
 						break;
 
-					case OpCode.JmpIf:
-						// Проверка существования метки в словаре перед преобразованием в число
-						if (labels.ContainsKey(instruction.Operand))
-						{
-							// Условный переход к метке
-							ilGenerator.Emit(OpCodes.Ldloc, int.Parse(instruction.Operand));
-							ilGenerator.Emit(OpCodes.Brtrue, labels[instruction.Operand]);
-						}
-						else
-						{
-							// Метка не найдена, обработка ошибки или пропуск инструкции
-							Console.WriteLine($"Метка {instruction.Operand} не найдена.");
-							// Здесь вы можете выбрать подходящее действие, например, выдачу сообщения об ошибке или пропуск инструкции
-						}
+					case OpCode.Call:
+						ilGenerator.Emit(OpCodes.Call, methodBuilder);
 						break;
-						// Добавьте обработку других инструкций
+
+					case OpCode.Ret:
+						ilGenerator.Emit(OpCodes.Ret);
+						break;
+
+					default:
+						Console.WriteLine($"Неизвестная инструкция: {instruction.OpCode}");
+						break;
 				}
 			}
+
 
 			// Завершение создания типа, метода и сборки
 			var dynamicType = typeBuilder.CreateType();
